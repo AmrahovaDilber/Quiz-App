@@ -1,20 +1,17 @@
-import questions from './data.js';
+import questions from "./data.js";
 
-class Quiz{
-    constructor(questions) {
-        this.questions = questions;
-        this.index = 0;
-        this.question=this.getQuestion()
-    }
+class Quiz {
+  constructor(questions) {
+    this.questions = questions;
+    this.index = 0;
+    this.question = this.getQuestion();
+  }
 
-    getQuestion() {
-        return this.questions[this.index]
-    }
-
-    
-
+  getQuestion() {
+    return this.questions[this.index];
+  }
 }
 
-const quiz = new Quiz(questions)
+const quiz = new Quiz(questions);
 
-console.log(quiz.getQuestion())
+console.log(quiz.getQuestion());
