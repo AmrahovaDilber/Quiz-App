@@ -2,6 +2,8 @@ import questions from "./data.js";
 const questionTitle = document.querySelector("#question");
 const options = document.querySelector("#options");
 const nextQuestion = document.querySelector("#nextQuestion");
+const currentQuestion = document.querySelector("#currentQuestion");
+const totalQuestion = document.querySelector("#totalQuestion");
 
 String.prototype.toHtmlEntities = function () {
   return this.replace(/./gm, function (s) {
@@ -14,6 +16,9 @@ class Quiz {
     this.questions = questions;
     this.index = 0;
     this.question = this.getQuestion();
+    totalQuestion.innerHTML = this.questions.length;
+    currentQuestion.innerHTML = this.index + 1;
+
     nextQuestion.addEventListener("click", () => {
       this.nextQuestion();
     });
@@ -29,16 +34,31 @@ class Quiz {
     } else {
       console.log("Oyun Bitdi");
     }
+    nextQuestion.classList.add("hidden");
+    options.style.pointerEvents = "initial";
     this.question = this.getQuestion();
     this.start();
+    currentQuestion.innerHTML = this.index + 1;
   }
   designOption(variant, text) {
     return `
         <div
-        data-option='true'
+        data-variant="${variant}"
         class="py-[9px] px-[12px] border rounded-lg ">
         <b>${variant}.</b>${text.toHtmlEntities()}
         </div>`;
+  }
+  checkVariant(variant) {
+    const el = options.querySelector(`[data-variant="${variant}"]`);
+    options.style.pointerEvents = "none";
+    nextQuestion.classList.remove("hidden");
+    if (
+      this.question.correct.toString().toLowerCase() ===variant.toString().toLowerCase()
+    ) {
+      el.classList.add("bg-green-500");
+    } else {
+      el.classList.add("bg-red-500");
+    }
   }
 
   start() {
@@ -50,6 +70,14 @@ class Quiz {
         this.question.options[option]
       );
     }
+
+    options.addEventListener("click", (e) => {
+      const variant = e.target.getAttribute("data-variant");
+
+      if (variant) {
+        this.checkVariant(variant);
+      }
+    });
   }
 }
 
