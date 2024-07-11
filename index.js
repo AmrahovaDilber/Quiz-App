@@ -1,10 +1,10 @@
 import questions from "./data.js";
 const questionTitle = document.querySelector("#question");
 const options = document.querySelector("#options");
+const nextQuestion = document.querySelector("#nextQuestion");
 
 String.prototype.toHtmlEntities = function () {
   return this.replace(/./gm, function (s) {
-    // return "&#" + s.charCodeAt(0) + ";";
     return s.match(/[a-z0-9\s]+/i) ? s : "&#" + s.charCodeAt(0) + ";";
   });
 };
@@ -14,13 +14,25 @@ class Quiz {
     this.questions = questions;
     this.index = 0;
     this.question = this.getQuestion();
+    nextQuestion.addEventListener("click", () => {
+      this.nextQuestion();
+    });
   }
 
   getQuestion() {
     return this.questions[this.index];
   }
 
-  designOption(variant,text) {
+  nextQuestion() {
+    if (this.index < this.questions.length - 1) {
+      this.index++;
+    } else {
+      console.log("Oyun Bitdi");
+    }
+    this.question = this.getQuestion();
+    this.start();
+  }
+  designOption(variant, text) {
     return `
         <div
         data-option='true'
