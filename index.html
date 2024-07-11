@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="fixed inset-0 bg-white flex items-center justify-center hidden">
+      <button class="h-[50px] px-[28px] bg-[#FFA722] text-white rounded-lg">
+        Start
+      </button>
+    </div>
+
+    <div class="w-[500px] mx-auto my-[50px] border">
+      <div class="flex items-center relative justify-between mx-4 border-b">
+        <span class="font-bold text-[18px]">Quiz App</span>
+        <div class="bg-[#626262] py-[5px] px-[8px] text-white rounded-lg">
+          <span>Time:</span>
+          <span
+            id="time"
+            class="inline-flex size-[25px] items-center justify-center bg-[#FFA722] rounded-lg"
+            >10</span
+          >
+        </div>
+
+        <div
+          style="width: 20%"
+          class="h-[2px] absolute bottom-0 left-0 bg-[#FFA722]"
+        ></div>
+      </div>
+
+      <div class="pt-[33px] px-[30px] text-black">
+        <h3 class="mb-[16px]" id="question"></h3>
+        <div class="space-y-[10px] mb-[15px]" id="options"></div>
+      </div>
+      <div
+        class="flex items-center justify-between py-[8px] px-[15px] bg-[#f0f0f0] border-t"
+      >
+        <span
+          class="bg-[#FFA772] px-[8px] flex items-center rounded-lg h-[35px] rounded-lg text-white"
+        >
+          <span id="currentQuestion">1</span>/<span id="totalQuestion">10</span>
+         
+        </span>
+
+        <button
+        id="nextQuestion"
+        class="bg-[#2260FF]  rounded-lg text-white h-[35px] px-[15px]"
+      >
+        Next Question
+      </button>
+      </div>
+    </div>
+
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
