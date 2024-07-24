@@ -4,6 +4,7 @@ const options = document.querySelector("#options");
 const nextQuestion = document.querySelector("#nextQuestion");
 const currentQuestion = document.querySelector("#currentQuestion");
 const totalQuestion = document.querySelector("#totalQuestion");
+const currentTime = document.querySelector("#time");
 
 String.prototype.toHtmlEntities = function () {
   return this.replace(/./gm, function (s) {
@@ -11,6 +12,7 @@ String.prototype.toHtmlEntities = function () {
   });
 };
 
+let timeInterval;
 class Quiz {
   constructor(questions) {
     this.questions = questions;
@@ -22,10 +24,23 @@ class Quiz {
     nextQuestion.addEventListener("click", () => {
       this.nextQuestion();
     });
+    this.startTime(10)
   }
 
   getQuestion() {
     return this.questions[this.index];
+  }
+
+  startTime(time) {
+    timeInterval=setInterval(() => {
+      currentTime.textContent =time
+      time--;
+      if (time < 0) {
+        clearInterval(timeInterval)
+      }
+    }, 1000);
+  
+
   }
 
   nextQuestion() {
@@ -53,7 +68,8 @@ class Quiz {
     options.style.pointerEvents = "none";
     nextQuestion.classList.remove("hidden");
     if (
-      this.question.correct.toString().toLowerCase() ===variant.toString().toLowerCase()
+      this.question.correct.toString().toLowerCase() ===
+      variant.toString().toLowerCase()
     ) {
       el.classList.add("bg-green-500");
     } else {
